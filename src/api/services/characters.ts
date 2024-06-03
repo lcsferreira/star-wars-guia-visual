@@ -9,8 +9,9 @@ interface ApiResponse<T> {
 }
 
 export async function getCharacters(
-  page: number
+  page: number,
+  search: string
 ): Promise<ApiResponse<Character>> {
-  const response = await api.get(`/people/?page=${page}`);
+  const response = await api.get(`/people/?page=${page}&search=${search}`);
   return response.data;
 }

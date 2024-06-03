@@ -14,7 +14,7 @@ const People = () => {
 
   const loadCharacters = async (page: number) => {
     setLoading(true);
-    const response = await getCharacters(page);
+    const response = await getCharacters(page, search);
     setCharacters(response.results);
     setTotal(response.count);
     setLoading(false);
@@ -22,7 +22,7 @@ const People = () => {
 
   useEffect(() => {
     loadCharacters(page);
-  }, [page]);
+  }, [page, search]);
 
   const columns = [
     {
