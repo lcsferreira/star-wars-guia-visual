@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Character } from "../api/models/Character";
 import { getCharacters } from "../api/services/characters";
 
-import { Input, Table, Pagination } from "antd";
+import { Input, Table, Pagination, Row, Card } from "antd";
+import Meta from "antd/es/card/Meta";
+import SkeletonImage from "antd/es/skeleton/Image";
 
 const { Search } = Input;
 const People = () => {
@@ -114,13 +116,50 @@ const People = () => {
         onSearch={(value) => setSearch(value)}
         style={{ marginBottom: "20px" }}
       />
-      <Table
+      {/* <Table
         columns={columns}
         dataSource={characters}
         loading={loading}
         pagination={false}
         rowKey="name"
-      />
+      /> */}
+      <Row justify="center">
+        {characters.map((character: Character) => (
+          <Card
+            loading={loading}
+            hoverable
+            cover={
+              loading ? (
+                <SkeletonImage
+                  active
+                  style={{ width: 240, margin: "0 auto" }}
+                />
+              ) : (
+                <img
+                  alt="example"
+                  src={`https://starwars-visualguide.com/assets/img/characters/${
+                    character?.url?.match(/\d+/)?.[0]
+                  }.jpg`}
+                />
+              )
+            }
+            style={{ width: 240, margin: "10px" }}
+          >
+            <Meta
+              title={character.name}
+              description={
+                <div>
+                  <p>Birth Year: {character.birth_year}</p>
+                  <p>Eye Color: {character.eye_color}</p>
+                  <p>Hair Color: {character.hair_color}</p>
+                  <p>Height: {character.height}</p>
+                  <p>Mass: {character.mass}</p>
+                </div>
+              }
+            />
+          </Card>
+        ))}
+      </Row>
       <Pagination
         current={page}
         total={total}
