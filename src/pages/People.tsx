@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { Character } from "../api/models/Character";
 import { getCharacters } from "../api/services/characters";
 
-import { Input, Pagination, Row, Card } from "antd";
-import Meta from "antd/es/card/Meta";
-import SkeletonImage from "antd/es/skeleton/Image";
+import { Flex, Input, Pagination, Row, Spin } from "antd";
 import { useDebounce } from "../hooks/useDebounce";
+import CharacterCard from "../components/CharacterCard";
 
 const { Search } = Input;
 
@@ -48,42 +47,15 @@ const People = () => {
         style={{ marginBottom: "20px" }}
       />
       <Row justify="center">
-        {characters.map((character: Character) => (
-          <Card
-            key={character.url}
-            loading={loading}
-            hoverable
-            cover={
-              loading ? (
-                <SkeletonImage
-                  active
-                  style={{ width: 240, margin: "0 auto" }}
-                />
-              ) : (
-                <img
-                  alt="example"
-                  src={`https://starwars-visualguide.com/assets/img/characters/${
-                    character?.url?.match(/\d+/)?.[0]
-                  }.jpg`}
-                />
-              )
-            }
-            style={{ width: 240, margin: "10px" }}
-          >
-            <Meta
-              title={character.name}
-              description={
-                <div>
-                  <p>Birth Year: {character.birth_year}</p>
-                  <p>Eye Color: {character.eye_color}</p>
-                  <p>Hair Color: {character.hair_color}</p>
-                  <p>Height: {character.height}</p>
-                  <p>Mass: {character.mass}</p>
-                </div>
-              }
-            />
-          </Card>
-        ))}
+        {loading && (
+          <Flex align="center" gap="middle">
+            <Spin size="large" />
+          </Flex>
+        )}
+        {!loading &&
+          characters.map((character: Character) => (
+            <CharacterCard key={character.url} {...character} />
+          ))}
       </Row>
       <Pagination
         current={page}
@@ -92,6 +64,7 @@ const People = () => {
         showSizeChanger={false}
         onChange={(page) => setPage(page)}
         style={{ marginTop: "20px", textAlign: "center" }}
+        disabled={loading}
       />
     </div>
   );
