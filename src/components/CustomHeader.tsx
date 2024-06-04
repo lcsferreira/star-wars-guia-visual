@@ -1,6 +1,5 @@
 import { Menu, MenuProps } from "antd";
 import { Link } from "react-router-dom"; // Certifique-se de ter o React Router configurado
-import logo from "../assets/logo.png";
 type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [

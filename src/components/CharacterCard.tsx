@@ -9,7 +9,7 @@ const CharacterCard = (character: Character) => {
       hoverable
       cover={
         <img
-          alt="example"
+          alt={character.name}
           src={`https://starwars-visualguide.com/assets/img/characters/${
             character?.url?.match(/\d+/)?.[0]
           }.jpg`}
