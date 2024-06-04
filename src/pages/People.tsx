@@ -16,7 +16,10 @@ const People = () => {
   const [search, setSearch] = useState<string>("");
   const debouncedSearch = useDebounce(search, 500);
 
-  const loadCharacters = async (page: number) => {
+  const loadCharacters = async (
+    page: number,
+    debouncedSearch: string
+  ): Promise<void> => {
     setLoading(true);
     const response = await getCharacters(page, debouncedSearch);
     setCharacters(response.results);
@@ -25,7 +28,7 @@ const People = () => {
   };
 
   useEffect(() => {
-    loadCharacters(page);
+    loadCharacters(page, debouncedSearch);
   }, [page, debouncedSearch]);
 
   const handleSearch = (value: string) => {
@@ -41,7 +44,7 @@ const People = () => {
   return (
     <div style={{ padding: "20px" }}>
       <Search
-        placeholder="Search characters"
+        placeholder="Pesquisar por personagens"
         onSearch={handleSearch}
         onChange={handleSearchChange}
         style={{ marginBottom: "20px" }}
