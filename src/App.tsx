@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from "antd";
+import { Card, ConfigProvider, theme } from "antd";
 import CustomHeader from "./components/CustomHeader";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import People from "./pages/People";
@@ -25,7 +25,15 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+    <ConfigProvider
+      theme={{
+        algorithm: theme.darkAlgorithm,
+        token: {
+          fontFamily: "ITC Avant Garde Gothic",
+          colorPrimary: "#BC1E22",
+        },
+      }}
+    >
       <RouterProvider router={router} />
     </ConfigProvider>
   );
