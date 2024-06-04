@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Character } from "../api/models/Character";
 import { getCharacters } from "../api/services/characters";
 
-import { Input, Table, Pagination, Row, Card } from "antd";
+import { Input, Pagination, Row, Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import SkeletonImage from "antd/es/skeleton/Image";
 import { useDebounce } from "../hooks/useDebounce";
@@ -11,10 +11,10 @@ const { Search } = Input;
 
 const People = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
   const debouncedSearch = useDebounce(search, 500);
 
   const loadCharacters = async (page: number) => {
@@ -34,17 +34,23 @@ const People = () => {
     setPage(1);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPage(1);
+    setSearch(e.target.value);
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <Search
         placeholder="Search characters"
         onSearch={handleSearch}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={handleSearchChange}
         style={{ marginBottom: "20px" }}
       />
       <Row justify="center">
         {characters.map((character: Character) => (
           <Card
+            key={character.url}
             loading={loading}
             hoverable
             cover={
@@ -83,6 +89,7 @@ const People = () => {
         current={page}
         total={total}
         pageSize={10}
+        showSizeChanger={false}
         onChange={(page) => setPage(page)}
         style={{ marginTop: "20px", textAlign: "center" }}
       />
