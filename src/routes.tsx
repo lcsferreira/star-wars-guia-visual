@@ -3,6 +3,7 @@ import People from "./pages/People";
 import { Home } from "./pages/Home";
 import Movies from "./pages/Movies";
 import CustomHeader from "./components/CustomHeader";
+import Character from "./pages/Character";
 
 const AppLayout = () => {
   return (
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/characters", element: <People /> },
       { path: "/movies", element: <Movies /> },
+      { path: "/characters/:id", element: <Character /> },
     ],
   },
 ]);
