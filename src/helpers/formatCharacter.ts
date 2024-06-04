@@ -1,4 +1,5 @@
 import { Character } from "../api/models/Character";
+import { getPlanet } from "../api/services/planets";
 
 export const formatHeight = (height: string) => {
   const heightInCm = parseInt(height, 10);
@@ -74,7 +75,19 @@ export const translateSkinColor = (skinColor: string) => {
   else return "Não informado";
 };
 
-export const formatCharacter = (character: Character): Character => {
+const fetchHomeWorldName = async (id: string): Promise<string> => {
+  try {
+    const response = await getPlanet(id);
+    return response.name;
+  } catch (error) {
+    console.log(error);
+    return "";
+  }
+};
+
+export const formatCharacter = async (
+  character: Character
+): Promise<Character> => {
   character.height = formatHeight(character.height);
   character.birth_year = formatBirthDate(character.birth_year);
   character.mass = formatMass(character.mass);
@@ -82,5 +95,9 @@ export const formatCharacter = (character: Character): Character => {
   character.hair_color = translateHairColor(character.hair_color);
   character.eye_color = translateEyeColor(character.eye_color);
   character.skin_color = translateSkinColor(character.skin_color);
+  const homeWorldId = character.homeworld.match(/\d+/)?.[0] || "";
+  const homeWorldName = await fetchHomeWorldName(homeWorldId);
+  character.homeworld = homeWorldName;
+
   return character;
 };

@@ -15,3 +15,8 @@ export async function getMovies(
   const response = await api.get(`/films/?page=${page}&search=${search}`);
   return response.data;
 }
+
+export async function getMovie(id: string): Promise<Movie> {
+  const response = await api.get(`/films/${id}`);
+  return response.data;
+}

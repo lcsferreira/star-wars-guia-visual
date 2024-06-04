@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Input, Pagination, Row, Spin } from "antd";
+import { Flex, Input, Layout, Pagination, Row, Spin } from "antd";
 import { useDebounce } from "../hooks/useDebounce";
 import { getMovies } from "../api/services/movies";
 import { Movie } from "../api/models/Movie";
@@ -40,7 +40,7 @@ const Movies = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <Layout>
       <Search
         placeholder="Pesquisar por filmes"
         onSearch={handleSearch}
@@ -67,7 +67,7 @@ const Movies = () => {
         style={{ marginTop: "20px", textAlign: "center" }}
         disabled={loading}
       />
-    </div>
+    </Layout>
   );
 };
 

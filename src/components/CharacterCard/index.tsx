@@ -1,7 +1,8 @@
-import { Card, Image, Skeleton } from "antd";
+import { Image, Skeleton } from "antd";
 import Meta from "antd/es/card/Meta";
-import { Character } from "../api/models/Character";
+import { Character } from "../../api/models/Character";
 import { Link } from "react-router-dom";
+import { StyledCard } from "./style";
 
 interface CharacterCardProps {
   character: Character;
@@ -11,13 +12,13 @@ interface CharacterCardProps {
 const CharacterCard = ({ character, loading }: CharacterCardProps) => {
   return (
     <Link to={`/characters/${character.url.match(/\d+/)?.[0]}`}>
-      <Card
+      <StyledCard
         key={character.url}
         loading={loading}
         hoverable
         cover={
           loading ? (
-            <Skeleton.Image style={{ width: 240 }} />
+            <Skeleton.Image style={{ height: 300, width: 240 }} active />
           ) : (
             <Image
               alt={character.name}
@@ -43,7 +44,7 @@ const CharacterCard = ({ character, loading }: CharacterCardProps) => {
             </p>
           }
         />
-      </Card>
+      </StyledCard>
     </Link>
   );
 };
