@@ -11,6 +11,11 @@ function App() {
           fontFamily: "ITC Avant Garde Gothic",
           colorPrimary: "#BC1E22",
         },
+        components: {
+          Layout: {
+            bodyBg: "transparent",
+          },
+        },
       }}
     >
       <RouterProvider router={router} />
