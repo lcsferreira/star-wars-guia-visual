@@ -24,7 +24,7 @@ const items: MenuItem[] = [
 ];
 
 const CustomHeader = () => {
-  return <Menu mode="horizontal" items={items}></Menu>;
+  return <Menu mode="horizontal" items={items} selectedKeys={[""]}></Menu>;
 };
 
 export default CustomHeader;

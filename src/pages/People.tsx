@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { Character } from "../api/models/Character";
 import { getCharacters } from "../api/services/characters";
-
-import { Flex, Input, Pagination, Row, Spin } from "antd";
+import Input from "antd/es/input";
+import Row from "antd/lib/row";
+import Pagination from "antd/es/pagination";
 import { useDebounce } from "../hooks/useDebounce";
 import CharacterCard from "../components/CharacterCard";
+import { formatCharacter } from "../helpers/formatCharacter";
+import { Header } from "antd/es/layout/layout";
+import Button from "antd/es/button";
 
 const { Search } = Input;
 
@@ -20,11 +24,19 @@ const People = () => {
     page: number,
     debouncedSearch: string
   ): Promise<void> => {
-    setLoading(true);
-    const response = await getCharacters(page, debouncedSearch);
-    setCharacters(response.results);
-    setTotal(response.count);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const response = await getCharacters(page, debouncedSearch);
+      response.results.forEach((character: Character) => {
+        formatCharacter(character);
+      });
+      setCharacters(response.results);
+      setTotal(response.count);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -43,21 +55,31 @@ const People = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <Search
-        placeholder="Pesquisar por personagens"
-        onSearch={handleSearch}
-        onChange={handleSearchChange}
-        style={{ marginBottom: "20px" }}
-      />
+      <Header
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "2rem",
+          backgroundColor: "transparent",
+        }}
+      >
+        <Button type="primary" href="/" color="primary">
+          Voltar
+        </Button>
+        <Search
+          placeholder="Pesquisar por personagens"
+          onSearch={handleSearch}
+          onChange={handleSearchChange}
+        />
+      </Header>
       <Row justify="center">
-        {loading && (
-          <Flex align="center" gap="middle">
-            <Spin size="large" />
-          </Flex>
-        )}
-        {!loading &&
+        {characters &&
           characters.map((character: Character) => (
-            <CharacterCard key={character.url} {...character} />
+            <CharacterCard
+              key={character.url}
+              character={character}
+              loading={loading}
+            />
           ))}
       </Row>
       <Pagination

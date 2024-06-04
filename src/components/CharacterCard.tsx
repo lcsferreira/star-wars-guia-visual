@@ -1,35 +1,46 @@
-import { Card } from "antd";
+import { Card, Image, Skeleton } from "antd";
 import Meta from "antd/es/card/Meta";
 import { Character } from "../api/models/Character";
 import { Link } from "react-router-dom";
 
-const CharacterCard = (character: Character) => {
+interface CharacterCardProps {
+  character: Character;
+  loading: boolean;
+}
+
+const CharacterCard = ({ character, loading }: CharacterCardProps) => {
   return (
     <Link to={`/characters/${character.url.match(/\d+/)?.[0]}`}>
       <Card
         key={character.url}
+        loading={loading}
         hoverable
         cover={
-          <img
-            alt={character.name}
-            src={`https://starwars-visualguide.com/assets/img/characters/${
-              character?.url?.match(/\d+/)?.[0]
-            }.jpg`}
-          />
+          loading ? (
+            <Skeleton.Image style={{ width: 240 }} />
+          ) : (
+            <Image
+              alt={character.name}
+              src={`https://starwars-visualguide.com/assets/img/characters/${
+                character?.url?.match(/\d+/)?.[0]
+              }.jpg`}
+              preview={false}
+              height={300}
+            />
+          )
         }
         style={{
           width: 240,
           margin: "10px",
+          height: 400,
         }}
       >
         <Meta
           title={character.name}
           description={
-            <div>
-              <p>Nasceu em: {character.birth_year}</p>
-              <p>Altura: {character.height}</p>
-              <p>Massa: {character.mass}</p>
-            </div>
+            <p style={{ fontSize: "12px", fontFamily: "AURABESH" }}>
+              {character.name}
+            </p>
           }
         />
       </Card>

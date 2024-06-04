@@ -5,6 +5,7 @@ import { Content, Header } from "antd/es/layout/layout";
 import type { Character } from "../api/models/Character";
 import { Col, Descriptions, Image, Layout, Row } from "antd";
 import Card from "antd/es/card/Card";
+import { formatCharacter } from "../helpers/formatCharacter";
 
 const CharacterDetails = () => {
   const [character, setCharacter] = useState<Character | null>(null);
@@ -13,8 +14,9 @@ const CharacterDetails = () => {
 
   const loadCharacter = async (id: string) => {
     setLoading(true);
-    const character = await getCharacter(id);
-    setCharacter(character);
+    const characterData = await getCharacter(id);
+    const formattedCharacter = formatCharacter(characterData);
+    setCharacter(formattedCharacter);
     setLoading(false);
   };
 
@@ -36,9 +38,22 @@ const CharacterDetails = () => {
         }}
       >
         <Card
-          title={character?.name}
+          title={
+            <div>
+              <p style={{ fontSize: "24px", fontWeight: "bold" }}>
+                {character?.name}
+              </p>
+              <p style={{ fontSize: "12px", fontFamily: "AURABESH" }}>
+                {character?.name}
+              </p>
+            </div>
+          }
           style={{ width: "50%" }}
-          extra={<Link to="/characters">Back</Link>}
+          extra={
+            <Link to="/characters" style={{ color: "#BC1E22" }}>
+              Voltar
+            </Link>
+          }
           loading={loading}
         >
           <Row gutter={16}>
@@ -49,30 +64,30 @@ const CharacterDetails = () => {
                 style={{ width: "100%" }}
               />
             </Col>
-            <Col span={12}>
-              <Descriptions column={1}>
-                <Descriptions.Item label="Birth Year">
+            <Col span={16}>
+              <Descriptions column={1} bordered>
+                <Descriptions.Item label="Ano de nascimento">
                   {character?.birth_year}
                 </Descriptions.Item>
-                <Descriptions.Item label="Homeworld">
+                <Descriptions.Item label="Nasceu em">
                   {character?.homeworld}
                 </Descriptions.Item>
-                <Descriptions.Item label="Height">
+                <Descriptions.Item label="Altura">
                   {character?.height}
                 </Descriptions.Item>
-                <Descriptions.Item label="Mass">
+                <Descriptions.Item label="Peso">
                   {character?.mass}
                 </Descriptions.Item>
-                <Descriptions.Item label="Eye Color">
+                <Descriptions.Item label="Cor dos olhos">
                   {character?.eye_color}
                 </Descriptions.Item>
-                <Descriptions.Item label="Gender">
+                <Descriptions.Item label="Gênero">
                   {character?.gender}
                 </Descriptions.Item>
-                <Descriptions.Item label="Hair Color">
+                <Descriptions.Item label="Cor do cabelo">
                   {character?.hair_color}
                 </Descriptions.Item>
-                <Descriptions.Item label="Skin Color">
+                <Descriptions.Item label="Cor da pele">
                   {character?.skin_color}
                 </Descriptions.Item>
               </Descriptions>
@@ -80,21 +95,21 @@ const CharacterDetails = () => {
           </Row>
         </Card>
         <Card
-          title="Additional Information"
+          title="Informações adicionais"
           style={{ width: "50%" }}
           loading={loading}
         >
           <Descriptions bordered column={1}>
-            <Descriptions.Item label="Films">
+            <Descriptions.Item label="Filmes que apareceu">
               {character?.films.join(", ")}
             </Descriptions.Item>
-            <Descriptions.Item label="Species">
+            <Descriptions.Item label="Pertence a">
               {character?.species.join(", ")}
             </Descriptions.Item>
-            <Descriptions.Item label="Starships">
+            <Descriptions.Item label="Naves que pilotou">
               {character?.starships.join(", ")}
             </Descriptions.Item>
-            <Descriptions.Item label="Vehicles">
+            <Descriptions.Item label="Veículos que pilotou">
               {character?.vehicles.join(", ")}
             </Descriptions.Item>
           </Descriptions>
