@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Movies from "./Movies";
+import Movies from "./index";
 
 test("renders movies component", () => {
   render(<Movies />);

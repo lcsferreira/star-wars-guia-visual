@@ -1,13 +1,12 @@
 import { useParams } from "react-router-dom";
-import { getCharacter } from "../api/services/characters";
+import { getCharacter } from "../../api/services/characters";
 import { useEffect, useState } from "react";
-import { Content } from "antd/es/layout/layout";
-import type { Character } from "../api/models/Character";
+import type { Character } from "../../api/models/Character";
 import { Layout, Spin } from "antd";
-import Card from "antd/es/card/Card";
-import { formatCharacter } from "../helpers/formatCharacter";
-import CharacterDetail from "../components/CharacterDetail";
-import MovieCarousel from "../components/MovieCarousel";
+import { formatCharacter } from "../../helpers/formatCharacter";
+import CharacterDetail from "../../components/CharacterDetail";
+import MovieCarousel from "../../components/MovieCarousel";
+import { CardError, CharacterDetailContainer, ContentError } from "./style";
 
 const CharacterDetails = () => {
   const [character, setCharacter] = useState<Character | null>(null);
@@ -39,27 +38,19 @@ const CharacterDetails = () => {
   if (error) {
     return (
       <Layout>
-        <Content style={{ display: "flex", justifyContent: "center" }}>
-          <Card title="Erro" style={{ width: "50%" }}>
+        <ContentError>
+          <CardError title="Erro">
             <p>{error}</p>
-          </Card>
-        </Content>
+          </CardError>
+        </ContentError>
       </Layout>
     );
   }
 
   return (
     <Layout>
-      <Content
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "20px",
-          padding: "20px",
-          flexWrap: "wrap",
-        }}
-      >
-        {loading && <Spin size="large" />}
+      <CharacterDetailContainer>
+        {loading && !character && <Spin size="large" />}
         {character && id && (
           <CharacterDetail
             character={character}
@@ -70,7 +61,7 @@ const CharacterDetails = () => {
         {character && id && (
           <MovieCarousel loading={loading} filmsUrls={character.films} />
         )}
-      </Content>
+      </CharacterDetailContainer>
     </Layout>
   );
 };
