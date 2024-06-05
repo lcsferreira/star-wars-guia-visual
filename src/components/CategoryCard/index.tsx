@@ -1,6 +1,5 @@
-import { Card } from "antd";
 import { Link } from "react-router-dom";
-import styles from "../styles/components/CategoryCard.module.css";
+import { CategoryContainer, CategoryImage } from "./style";
 
 export interface CategoryCardProps {
   title: string;
@@ -11,20 +10,19 @@ export interface CategoryCardProps {
 const CategoryCard = (category: CategoryCardProps) => {
   return (
     <Link to={category.link}>
-      <Card
-        className={styles.card}
+      <CategoryContainer
         title={category.title}
         hoverable
         cover={
-          <img
-            className={styles.cover}
+          <CategoryImage
             alt={category.title}
             src={category.cover_img}
+            preview={false}
           />
         }
       >
         Descubra sobre os personagens.
-      </Card>
+      </CategoryContainer>
     </Link>
   );
 };
