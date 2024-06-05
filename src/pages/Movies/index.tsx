@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Input, Layout, Pagination, Row, Spin } from "antd";
-import { useDebounce } from "../hooks/useDebounce";
-import { getMovies } from "../api/services/movies";
-import { Movie } from "../api/models/Movie";
-import MovieCard from "../components/MovieCard";
-const { Search } = Input;
+import { Flex, Row, Spin } from "antd";
+import { useDebounce } from "../../hooks/useDebounce";
+import { getMovies } from "../../api/services/movies";
+import { Movie } from "../../api/models/Movie";
+import MovieCard from "../../components/MovieCard";
+import { BackButton, Container, SearchBar, SearchInput } from "./style";
+import Button from "antd/es/button";
+import { PaginationContainer } from "../People/style";
 
 const Movies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -40,13 +42,19 @@ const Movies = () => {
   };
 
   return (
-    <Layout>
-      <Search
-        placeholder="Pesquisar por filmes"
-        onSearch={handleSearch}
-        onChange={handleSearchChange}
-        style={{ marginBottom: "20px" }}
-      />
+    <Container>
+      <SearchBar>
+        <BackButton to="/">
+          <Button type="primary" color="primary">
+            Voltar
+          </Button>
+        </BackButton>
+        <SearchInput
+          placeholder="Pesquisar por filmes"
+          onSearch={handleSearch}
+          onChange={handleSearchChange}
+        />
+      </SearchBar>
       <Row justify="center">
         {loading && (
           <Flex align="center" gap="middle">
@@ -58,16 +66,15 @@ const Movies = () => {
             <MovieCard key={movie.url} {...movie} />
           ))}
       </Row>
-      <Pagination
+      <PaginationContainer
         current={page}
         total={total}
         pageSize={10}
         showSizeChanger={false}
         onChange={(page) => setPage(page)}
-        style={{ marginTop: "20px", textAlign: "center" }}
         disabled={loading}
       />
-    </Layout>
+    </Container>
   );
 };
 
