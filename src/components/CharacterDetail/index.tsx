@@ -1,8 +1,8 @@
-import { Character } from "../api/models/Character";
-import { Link } from "react-router-dom";
-
+import { Character } from "../../api/models/Character";
 import { Col, Descriptions, Image, Row } from "antd";
-import Card from "antd/es/card/Card";
+import { BackButton, CharacterDetailCard } from "./style";
+import CharacterDetailTitle from "../CharacterDetailTitle";
+import useWindowDimensions from "../../hooks/useWindowDimensios";
 
 interface CharacterDetailProps {
   character: Character;
@@ -15,36 +15,29 @@ const CharacterDetail = ({
   loading,
   characterId,
 }: CharacterDetailProps) => {
+  const { height, width } = useWindowDimensions();
+
   return (
-    <Card
-      title={
-        <div>
-          <p style={{ fontSize: "24px", fontWeight: "bold" }}>
-            {character?.name}
-          </p>
-          <p style={{ fontSize: "12px", fontFamily: "AURABESH" }}>
-            {character?.name}
-          </p>
-        </div>
-      }
-      style={{ width: "50%" }}
-      extra={
-        <Link to="/characters" style={{ color: "#BC1E22" }}>
-          Voltar
-        </Link>
-      }
+    <CharacterDetailCard
+      title={<CharacterDetailTitle characterName={character?.name} />}
+      extra={<BackButton to="/characters">Voltar</BackButton>}
       loading={loading}
     >
-      <Row gutter={16}>
-        <Col span={8}>
+      <Row gutter={[16, 16]}>
+        <Col span={6} xs={24} sm={24} md={6} lg={6} xl={6}>
           <Image
             src={`https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`}
             alt={character?.name}
             style={{ width: "100%" }}
           />
         </Col>
-        <Col span={16}>
-          <Descriptions column={1} bordered>
+        <Col span={18} xs={24} sm={24} md={18} lg={18} xl={18}>
+          <Descriptions
+            bordered
+            size="small"
+            column={1}
+            layout={width > 768 ? "horizontal" : "vertical"}
+          >
             <Descriptions.Item label="Ano de nascimento">
               {character?.birth_year}
             </Descriptions.Item>
@@ -72,7 +65,7 @@ const CharacterDetail = ({
           </Descriptions>
         </Col>
       </Row>
-    </Card>
+    </CharacterDetailCard>
   );
 };
 
