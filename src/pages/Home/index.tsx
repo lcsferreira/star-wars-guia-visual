@@ -1,37 +1,21 @@
-import { Col, Layout, Row } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
-import CategoryCard from "../components/CategoryCard";
+import Col from "antd/lib/col";
+import Row from "antd/lib/row";
+import CategoryCard from "../../components/CategoryCard";
+import {
+  Container,
+  HomeContent,
+  HomeFooter,
+  HomeTitle,
+  SpanTitle,
+} from "./style";
 
 export const Home = () => {
   return (
-    <Layout
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "transparent",
-      }}
-    >
-      <Header
-        style={{
-          color: "white",
-          fontSize: "24px",
-          textAlign: "center",
-          backgroundColor: "transparent",
-          marginTop: "20px",
-          height: "auto",
-        }}
-      >
-        Bem-vindo ao Guia Visual de{" "}
-        <span
-          style={{
-            color: "#BC1E22",
-            fontSize: "32px",
-            fontFamily: "SFDistantGalaxy-Regular",
-          }}
-        >
-          Star Wars
-        </span>
-      </Header>
-      <Content style={{ padding: "50px" }}>
+    <Container>
+      <HomeTitle>
+        Bem-vindo ao Guia Visual de <SpanTitle>Star Wars</SpanTitle>
+      </HomeTitle>
+      <HomeContent>
         <Row gutter={[16, 16]} wrap={true}>
           <Col span={6} xs={24} sm={12} md={6} lg={6} xl={6}>
             <CategoryCard
@@ -62,12 +46,12 @@ export const Home = () => {
             />
           </Col>
         </Row>
-      </Content>
-      <Footer style={{ textAlign: "center", backgroundColor: "transparent" }}>
+      </HomeContent>
+      <HomeFooter>
         Desenvolvido por Lucas Ferreira ©2024. Star wars e todos os personagens
         são de autoria da Disney e Lucasfilm. As imagens foram recolhidas
         livremente da Wookiepedia e Unsplash.
-      </Footer>
-    </Layout>
+      </HomeFooter>
+    </Container>
   );
 };
