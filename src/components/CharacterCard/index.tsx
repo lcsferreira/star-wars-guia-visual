@@ -2,7 +2,7 @@ import { Image, Skeleton } from "antd";
 import Meta from "antd/es/card/Meta";
 import { Character } from "../../api/models/Character";
 import { Link } from "react-router-dom";
-import { StyledCard } from "./style";
+import { SkeletonImage, CharacterContainer, Description } from "./style";
 
 interface CharacterCardProps {
   character: Character;
@@ -12,13 +12,13 @@ interface CharacterCardProps {
 const CharacterCard = ({ character, loading }: CharacterCardProps) => {
   return (
     <Link to={`/characters/${character.url.match(/\d+/)?.[0]}`}>
-      <StyledCard
+      <CharacterContainer
         key={character.url}
         loading={loading}
         hoverable
         cover={
           loading ? (
-            <Skeleton.Image style={{ height: 300, width: 240 }} active />
+            <SkeletonImage active />
           ) : (
             <Image
               alt={character.name}
@@ -30,21 +30,12 @@ const CharacterCard = ({ character, loading }: CharacterCardProps) => {
             />
           )
         }
-        style={{
-          width: 240,
-          margin: "10px",
-          height: 400,
-        }}
       >
         <Meta
           title={character.name}
-          description={
-            <p style={{ fontSize: "12px", fontFamily: "AURABESH" }}>
-              {character.name}
-            </p>
-          }
+          description={<Description>{character.name}</Description>}
         />
-      </StyledCard>
+      </CharacterContainer>
     </Link>
   );
 };
