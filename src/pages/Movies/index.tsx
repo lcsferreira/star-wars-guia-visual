@@ -7,6 +7,7 @@ import MovieCard from "../../components/MovieCard";
 import { BackButton, Container, SearchBar, SearchInput } from "./style";
 import Button from "antd/es/button";
 import { PaginationContainer } from "../People/style";
+import { formatMovie } from "../../helpers/formatMovie";
 
 const Movies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -22,6 +23,9 @@ const Movies = () => {
   ): Promise<void> => {
     setLoading(true);
     const response = await getMovies(page, debouncedSearch);
+    response.results = response.results.map((movie: Movie) =>
+      formatMovie(movie)
+    );
     setMovies(response.results);
     setTotal(response.count);
     setLoading(false);
