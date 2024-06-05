@@ -33,7 +33,9 @@ const CharacterCard = ({ character, loading }: CharacterCardProps) => {
       >
         <Meta
           title={character.name}
-          description={<Description>{character.name}</Description>}
+          description={
+            <Description type="secondary">{character.name}</Description>
+          }
         />
       </CharacterContainer>
     </Link>

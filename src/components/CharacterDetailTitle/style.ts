@@ -20,6 +20,7 @@ export const TooltipTitleName = styled(Title)`
 `;
 
 export const ContainerTitle = styled.div`
+  width: max-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

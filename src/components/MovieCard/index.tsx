@@ -11,21 +11,23 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie, loading }: MovieCardProps) => {
   return (
-    <MovieContainer
-      title={movie.title}
-      extra={<Link to={`/movies/${movie.episode_id}`}>Detalhes</Link>}
-      loading={loading}
-      cover={
-        <Image
-          alt={movie.title}
-          src={`https://starwars-visualguide.com/assets/img/films/${
-            movie?.url?.match(/\d+/)?.[0]
-          }.jpg`}
-        />
-      }
-    >
-      <Meta title={movie.title} description={movie.release_date} />
-    </MovieContainer>
+    <Link to={`/movies/${movie.episode_id}`}>
+      <MovieContainer
+        title={movie.title}
+        loading={loading}
+        cover={
+          <Image
+            alt={movie.title}
+            src={`https://starwars-visualguide.com/assets/img/films/${
+              movie?.url?.match(/\d+/)?.[0]
+            }.jpg`}
+            preview={false}
+          />
+        }
+      >
+        <Meta title={movie.title} description={movie.release_date} />
+      </MovieContainer>
+    </Link>
   );
 };
 
