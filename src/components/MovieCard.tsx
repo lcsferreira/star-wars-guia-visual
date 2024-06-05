@@ -1,12 +1,18 @@
 import { Card } from "antd";
 import { Movie } from "../api/models/Movie";
 
-const MovieCard = (movie: Movie) => {
+interface MovieCardProps {
+  movie: Movie;
+  loading: boolean;
+}
+
+const MovieCard = ({ movie, loading }: MovieCardProps) => {
   return (
     <Card
       title={movie.title}
       style={{ width: 300, margin: "20px" }}
       extra={<a href={`/movies/${movie.episode_id}`}>Detalhes</a>}
+      loading={loading}
       cover={
         <img
           alt={movie.title}

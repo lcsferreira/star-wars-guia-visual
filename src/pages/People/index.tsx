@@ -14,6 +14,8 @@ import {
   SearchBar,
   SearchInput,
 } from "./style";
+import Flex from "antd/es/flex";
+import Spin from "antd/es/spin";
 
 const People = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -79,6 +81,11 @@ const People = () => {
               loading={loading}
             />
           ))}
+        {loading && characters.length === 0 && (
+          <Flex align="center" gap="middle">
+            <Spin size="large" />
+          </Flex>
+        )}
       </Row>
       <PaginationContainer
         current={page}

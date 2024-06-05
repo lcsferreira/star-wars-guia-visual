@@ -56,14 +56,14 @@ const Movies = () => {
         />
       </SearchBar>
       <Row justify="center">
-        {loading && (
+        {loading && movies.length === 0 && (
           <Flex align="center" gap="middle">
             <Spin size="large" />
           </Flex>
         )}
-        {!loading &&
+        {movies &&
           movies.map((movie: Movie) => (
-            <MovieCard key={movie.url} {...movie} />
+            <MovieCard key={movie.url} loading={loading} movie={movie} />
           ))}
       </Row>
       <PaginationContainer
