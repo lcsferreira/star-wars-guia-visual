@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { Character } from "../api/models/Character";
-import { getCharacters } from "../api/services/characters";
-import Input from "antd/es/input";
+import { Character } from "../../api/models/Character";
+import { getCharacters } from "../../api/services/characters";
 import Row from "antd/es/row";
-import Pagination from "antd/es/pagination";
-import { useDebounce } from "../hooks/useDebounce";
-import CharacterCard from "../components/CharacterCard/index";
-import { formatCharacter } from "../helpers/formatCharacter";
-import { Header } from "antd/es/layout/layout";
+import { useDebounce } from "../../hooks/useDebounce";
+import CharacterCard from "../../components/CharacterCard/index";
+import { formatCharacter } from "../../helpers/formatCharacter";
 import Button from "antd/es/button";
 
-const { Search } = Input;
+import {
+  BackButton,
+  Container,
+  PaginationContainer,
+  SearchBar,
+  SearchInput,
+} from "./style";
 
 const People = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -48,30 +51,25 @@ const People = () => {
     setPage(1);
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPage(1);
     setSearch(e.target.value);
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <Header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: "2rem",
-          backgroundColor: "transparent",
-        }}
-      >
-        <Button type="primary" href="/" color="primary">
-          Voltar
-        </Button>
-        <Search
+    <Container>
+      <SearchBar>
+        <BackButton to="/">
+          <Button type="primary" color="primary">
+            Voltar
+          </Button>
+        </BackButton>
+        <SearchInput
           placeholder="Pesquisar por personagens"
           onSearch={handleSearch}
           onChange={handleSearchChange}
         />
-      </Header>
+      </SearchBar>
       <Row justify="center">
         {characters &&
           characters.map((character: Character) => (
@@ -82,16 +80,15 @@ const People = () => {
             />
           ))}
       </Row>
-      <Pagination
+      <PaginationContainer
         current={page}
         total={total}
         pageSize={10}
         showSizeChanger={false}
         onChange={(page) => setPage(page)}
-        style={{ marginTop: "20px", textAlign: "center" }}
         disabled={loading}
       />
-    </div>
+    </Container>
   );
 };
 
