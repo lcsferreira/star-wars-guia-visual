@@ -14,6 +14,7 @@ const MovieCard = ({ movie, loading }: MovieCardProps) => {
     <Link to={`/movies/${movie.episode_id}`}>
       <MovieContainer
         title={movie.title}
+        hoverable
         loading={loading}
         cover={
           <Image

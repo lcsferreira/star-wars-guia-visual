@@ -7,6 +7,7 @@ import { formatCharacter } from "../../helpers/formatCharacter";
 import CharacterDetail from "../../components/CharacterDetail";
 import MovieCarousel from "../../components/MovieCarousel";
 import { CardError, CharacterDetailContainer, ContentError } from "./style";
+import StarshipsCarousel from "../../components/StarshipsCarousel";
 
 const CharacterDetails = () => {
   const [character, setCharacter] = useState<Character | null>(null);
@@ -59,7 +60,13 @@ const CharacterDetails = () => {
           />
         )}
         {character && id && (
-          <MovieCarousel loading={loading} filmsUrls={character.films} />
+          <>
+            <MovieCarousel loading={loading} filmsUrls={character.films} />
+            <StarshipsCarousel
+              loading={loading}
+              starshipsUrls={character.starships}
+            />
+          </>
         )}
       </CharacterDetailContainer>
     </Layout>
