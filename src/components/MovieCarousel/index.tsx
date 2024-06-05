@@ -1,8 +1,9 @@
 import { Card, Image } from "antd"; // Import the Image component from antd
 import { useEffect, useState } from "react";
-import { Movie } from "../api/models/Movie";
-import { getMovie } from "../api/services/movies";
-import Carousel from "antd/lib/carousel";
+import { Movie } from "../../api/models/Movie";
+import { getMovie } from "../../api/services/movies";
+import { CarouselContainer, CharacterMoviesContainer } from "./style";
+
 interface MovieCarouselProps {
   loading: boolean;
   filmsUrls: string[];
@@ -12,19 +13,25 @@ const MovieCarousel = ({ loading, filmsUrls }: MovieCarouselProps) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loadingMovies, setLoadingMovies] = useState<boolean>(false);
 
-  const fetchMovies = async () => {
+  const getAllMovies = async (): Promise<Movie[]> => {
+    const moviesData = await Promise.all(
+      filmsUrls.map(async (url: string): Promise<Movie> => {
+        const movieId = url.match(/\d+/)?.[0]; // Add a null check before accessing the first element
+        if (movieId) {
+          return await getMovie(movieId);
+        }
+        throw new Error("Invalid movieId");
+      })
+    );
+
+    return moviesData;
+  };
+
+  const fetchMovies = async (): Promise<void> => {
     setLoadingMovies(true);
     try {
-      const moviesData = await Promise.all(
-        filmsUrls.map(async (url) => {
-          const movieId = url.match(/\d+/)?.[0];
-          if (movieId) {
-            return await getMovie(movieId);
-          }
-          return null;
-        })
-      );
-      setMovies(moviesData.filter((movie) => movie !== null) as Movie[]);
+      const moviesData = await getAllMovies();
+      setMovies(moviesData);
     } catch (error) {
       console.error(error);
     } finally {
@@ -37,12 +44,8 @@ const MovieCarousel = ({ loading, filmsUrls }: MovieCarouselProps) => {
   }, [filmsUrls]);
 
   return (
-    <Card
-      title="Aparições em filmes"
-      style={{ width: "50%" }}
-      loading={loading}
-    >
-      <Carousel arrows style={{ width: 300, margin: "0 auto" }} autoplay dots>
+    <CharacterMoviesContainer title="Aparições em filmes" loading={loading}>
+      <CarouselContainer arrows autoplay dots>
         {movies.map((movie) => (
           <Card
             key={movie.episode_id}
@@ -55,13 +58,12 @@ const MovieCarousel = ({ loading, filmsUrls }: MovieCarouselProps) => {
                 }.jpg`}
                 alt={movie.title}
                 preview={false}
-                width={300}
               />
             }
           ></Card>
         ))}
-      </Carousel>
-    </Card>
+      </CarouselContainer>
+    </CharacterMoviesContainer>
   );
 };
 
