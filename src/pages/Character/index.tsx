@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import type { Character } from "../../api/models/Character";
 import { Layout, Spin } from "antd";
 import { formatCharacter } from "../../helpers/formatCharacter";
-import CharacterDetail from "../../components/CharacterDetail";
-import MovieCarousel from "../../components/MovieCarousel";
+import CharacterDetail from "../../components/Characters/CharacterDetail";
+import MovieCarousel from "../../components/Movies/MovieCarousel";
 import { CardError, CharacterDetailContainer, ContentError } from "./style";
-import StarshipsCarousel from "../../components/StarshipsCarousel";
-import VehiclesCarousel from "../../components/VehiclesCarousel";
+import StarshipsCarousel from "../../components/Starships/StarshipsCarousel";
+import VehiclesCarousel from "../../components/Vehicles/VehiclesCarousel";
 
 const CharacterDetails = () => {
   const [character, setCharacter] = useState<Character | null>(null);

@@ -1,7 +1,7 @@
 import { Avatar, Card, Col, Row, Skeleton, Tooltip, Typography } from "antd";
-import { Character } from "../../api/models/Character";
+import { Character } from "../../../api/models/Character";
 import { useEffect, useState } from "react";
-import { getCharacter } from "../../api/services/characters";
+import { getCharacter } from "../../../api/services/characters";
 import { CharacterAvatarsContainer } from "./style";
 
 interface CharactersAvatarsProps {

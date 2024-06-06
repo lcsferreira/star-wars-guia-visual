@@ -1,6 +1,6 @@
 import { Image, Skeleton } from "antd";
 import Meta from "antd/es/card/Meta";
-import { Character } from "../../api/models/Character";
+import { Character } from "../../../api/models/Character";
 import { Link } from "react-router-dom";
 import { SkeletonImage, CharacterContainer, Description } from "./style";
 

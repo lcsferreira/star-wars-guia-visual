@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Starship } from "../../api/models/Starship";
-import { getStarship } from "../../api/services/starships";
+import { Starship } from "../../../api/models/Starship";
+import { getStarship } from "../../../api/services/starships";
 import { CarouselContainer, CharacterStarshipsContainer } from "./style";
 import { Card, Image } from "antd";
 

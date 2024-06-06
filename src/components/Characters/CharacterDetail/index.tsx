@@ -1,8 +1,8 @@
-import { Character } from "../../api/models/Character";
+import { Character } from "../../../api/models/Character";
 import { Col, Descriptions, Image, Row } from "antd";
 import { BackButton, CharacterDetailCard } from "./style";
 import CharacterDetailTitle from "../CharacterDetailTitle";
-import useWindowDimensions from "../../hooks/useWindowDimensios";
+import useWindowDimensions from "../../../hooks/useWindowDimensios";
 
 interface CharacterDetailProps {
   character: Character;

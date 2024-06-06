@@ -3,7 +3,7 @@ import { Character } from "../../api/models/Character";
 import { getCharacters } from "../../api/services/characters";
 import Row from "antd/es/row";
 import { useDebounce } from "../../hooks/useDebounce";
-import CharacterCard from "../../components/CharacterCard/index";
+import CharacterCard from "../../components/Characters/CharacterCard/index";
 import { formatCharacter } from "../../helpers/formatCharacter";
 import Button from "antd/es/button";
 

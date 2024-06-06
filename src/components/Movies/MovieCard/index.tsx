@@ -1,4 +1,4 @@
-import { Movie } from "../../api/models/Movie";
+import { Movie } from "../../../api/models/Movie";
 import { Image } from "antd/lib";
 import { Link } from "react-router-dom";
 import Meta from "antd/es/card/Meta";

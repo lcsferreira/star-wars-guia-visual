@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getVehicle } from "../../api/services/vehicles";
+import { getVehicle } from "../../../api/services/vehicles";
 import { Card, Image } from "antd";
 import { CarouselContainer, CharacterVehiclesContainer } from "./style";
-import { Vehicle } from "../../api/models/Vehicle";
+import { Vehicle } from "../../../api/models/Vehicle";
 
 interface VehiclesCarouselProps {
   loading: boolean;

@@ -1,7 +1,7 @@
 import { Card, Image } from "antd"; // Import the Image component from antd
 import { useEffect, useState } from "react";
-import { Movie } from "../../api/models/Movie";
-import { getMovie } from "../../api/services/movies";
+import { Movie } from "../../../api/models/Movie";
+import { getMovie } from "../../../api/services/movies";
 import { CarouselContainer, CharacterMoviesContainer } from "./style";
 
 interface MovieCarouselProps {

@@ -1,11 +1,11 @@
 import { Col, Row, Typography, Image, Descriptions, Button } from "antd";
-import { Movie } from "../../api/models/Movie";
+import { Movie } from "../../../api/models/Movie";
 import { BackButton, MovieDetailCard } from "./style";
 import StarWarsCrawl from "../StarWarsCrawl";
 import { useState } from "react";
 import PlayCircleFilled from "@ant-design/icons/lib/icons/PlayCircleFilled";
 import StopFilled from "@ant-design/icons/lib/icons/StopFilled";
-import useWindowDimensions from "../../hooks/useWindowDimensios";
+import useWindowDimensions from "../../../hooks/useWindowDimensios";
 
 interface MovieDetailProps {
   movie: Movie;

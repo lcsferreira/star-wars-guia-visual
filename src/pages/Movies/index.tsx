@@ -3,7 +3,7 @@ import { Flex, Row, Spin } from "antd";
 import { useDebounce } from "../../hooks/useDebounce";
 import { getMovies } from "../../api/services/movies";
 import { Movie } from "../../api/models/Movie";
-import MovieCard from "../../components/MovieCard";
+import MovieCard from "../../components/Movies/MovieCard";
 import { BackButton, Container, SearchBar, SearchInput } from "./style";
 import Button from "antd/es/button";
 import { PaginationContainer } from "../People/style";
