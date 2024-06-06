@@ -6,6 +6,7 @@ import { formatMovie } from "../../helpers/formatMovie";
 import { Layout, Spin } from "antd";
 import { CardError, ContentError, MovieDetailContainer } from "./style";
 import MovieDetail from "../../components/MovieDetail";
+import CharactersAvatars from "../../components/CharactersAvatars";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -51,7 +52,13 @@ const MovieDetails = () => {
       <MovieDetailContainer>
         {loading && !movie && <Spin size="large" />}
         {movie && id && (
-          <MovieDetail movie={movie} loading={loading} movieId={id} />
+          <>
+            <MovieDetail movie={movie} loading={loading} movieId={id} />
+            <CharactersAvatars
+              characters={movie.characters}
+              loading={loading}
+            />
+          </>
         )}
         {/* {movie && id && (
           // <>
