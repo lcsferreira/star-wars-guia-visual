@@ -1,12 +1,6 @@
 import { Movie } from "../api/models/Movie";
-
-export const formatMovie = (movie: Movie): Movie => {
-  return {
-    ...movie,
-    release_date: formatReleaseDate(movie.release_date),
-    title: translateTitle(movie.title),
-  };
-};
+import { getCharacter } from "../api/services/characters";
+import { getPlanet } from "../api/services/planets";
 
 const translateTitle = (title: string): string => {
   if (title === "A New Hope") {
@@ -42,4 +36,12 @@ const translateTitle = (title: string): string => {
 const formatReleaseDate = (date: string): string => {
   const formattedDate = new Date(date);
   return formattedDate.toLocaleDateString();
+};
+
+export const formatMovie = (movie: Movie): Movie => {
+  return {
+    ...movie,
+    release_date: formatReleaseDate(movie.release_date),
+    title: translateTitle(movie.title),
+  };
 };

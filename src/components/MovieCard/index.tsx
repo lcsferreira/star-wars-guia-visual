@@ -10,8 +10,9 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ movie, loading }: MovieCardProps) => {
+  const id = movie.url.match(/\d+/)?.[0];
   return (
-    <Link to={`/movies/${movie.episode_id}`}>
+    <Link to={`/movies/${id}`}>
       <MovieContainer
         title={movie.title}
         hoverable
