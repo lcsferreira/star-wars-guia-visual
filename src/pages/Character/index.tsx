@@ -8,6 +8,7 @@ import CharacterDetail from "../../components/CharacterDetail";
 import MovieCarousel from "../../components/MovieCarousel";
 import { CardError, CharacterDetailContainer, ContentError } from "./style";
 import StarshipsCarousel from "../../components/StarshipsCarousel";
+import VehiclesCarousel from "../../components/VehiclesCarousel";
 
 const CharacterDetails = () => {
   const [character, setCharacter] = useState<Character | null>(null);
@@ -65,6 +66,10 @@ const CharacterDetails = () => {
             <StarshipsCarousel
               loading={loading}
               starshipsUrls={character.starships}
+            />
+            <VehiclesCarousel
+              loading={loading}
+              vehiclesUrls={character.vehicles}
             />
           </>
         )}
