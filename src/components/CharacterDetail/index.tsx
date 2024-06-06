@@ -44,6 +44,9 @@ const CharacterDetail = ({
             <Descriptions.Item label="Nasceu em">
               {character?.homeworld}
             </Descriptions.Item>
+            <Descriptions.Item label="Espécie">
+              {character?.species[0]}
+            </Descriptions.Item>
             <Descriptions.Item label="Altura">
               {character?.height}
             </Descriptions.Item>

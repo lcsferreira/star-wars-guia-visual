@@ -1,5 +1,6 @@
 import { Character } from "../api/models/Character";
 import { getPlanet } from "../api/services/planets";
+import { getSpecie } from "../api/services/species";
 
 export const formatHeight = (height: string) => {
   const heightInCm = parseInt(height, 10);
@@ -85,6 +86,16 @@ const fetchHomeWorldName = async (id: string): Promise<string> => {
   }
 };
 
+const fetchSpeciesName = async (id: string): Promise<string> => {
+  try {
+    const response = await getSpecie(id);
+    return response.name;
+  } catch (error) {
+    console.log(error);
+    return "";
+  }
+};
+
 export const formatCharacter = async (
   character: Character
 ): Promise<Character> => {
@@ -97,7 +108,25 @@ export const formatCharacter = async (
   character.skin_color = translateSkinColor(character.skin_color);
   const homeWorldId = character.homeworld.match(/\d+/)?.[0] || "";
   const homeWorldName = await fetchHomeWorldName(homeWorldId);
-  character.homeworld = homeWorldName;
+
+  if (homeWorldName === "unknown") {
+    character.homeworld = "Desconhecido";
+  } else {
+    character.homeworld = homeWorldName;
+  }
+
+  if (character.species.length === 0) {
+    character.species.push("Humano");
+  } else {
+    const speciesId = character.species[0].match(/\d+/)?.[0] || "";
+    const speciesName = await fetchSpeciesName(speciesId);
+
+    if (speciesName === "Yoda's species") {
+      character.species[0] = "Yoda";
+    } else {
+      character.species[0] = speciesName;
+    }
+  }
 
   return character;
 };
