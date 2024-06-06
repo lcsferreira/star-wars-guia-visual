@@ -6,6 +6,7 @@ import CustomHeader from "../components/CustomHeader";
 import Character from "../pages/Character";
 import { RouteLayout } from "./style";
 import Movie from "../pages/Movie";
+import Planets from "../pages/Planets";
 
 const AppLayout = () => {
   return (
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       { path: "/movies/:id", element: <Movie /> },
       {
         path: "/planets",
-        element: <div>Planets</div>,
+        element: <Planets />,
       },
       {
         path: "/species",
