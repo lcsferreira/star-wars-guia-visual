@@ -1,4 +1,4 @@
-import { Avatar, Card, Col, Row, Skeleton, Tooltip, Typography } from "antd";
+import { Avatar, Col, Row, Skeleton, Tooltip } from "antd";
 import { Character } from "../../../api/models/Character";
 import { useEffect, useState } from "react";
 import { getCharacter } from "../../../api/services/characters";
@@ -6,10 +6,10 @@ import { CharacterAvatarsContainer } from "./style";
 
 interface CharactersAvatarsProps {
   characters: string[];
-  loading?: boolean;
+  title: string;
 }
 
-const CharactersAvatars = ({ characters, loading }: CharactersAvatarsProps) => {
+const CharactersAvatars = ({ characters, title }: CharactersAvatarsProps) => {
   const [charactersData, setCharacters] = useState<Character[]>([]);
   const [loadingCharacters, setLoadingCharacters] = useState<boolean>(false);
 
@@ -44,7 +44,7 @@ const CharactersAvatars = ({ characters, loading }: CharactersAvatarsProps) => {
   }, [characters]);
 
   return (
-    <CharacterAvatarsContainer title="Personagens" loading={loading}>
+    <CharacterAvatarsContainer title={title} loading={loadingCharacters}>
       <Row gutter={[16, 16]} justify="center" align={"middle"}>
         {charactersData.map((character) => (
           <Col key={character.url} xs={10} sm={8} md={6} lg={6} xl={4}>

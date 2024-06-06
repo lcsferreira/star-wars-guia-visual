@@ -7,6 +7,7 @@ import { Layout, Spin } from "antd";
 import { CardError, ContentError, MovieDetailContainer } from "./style";
 import MovieDetail from "../../components/Movies/MovieDetail";
 import CharactersAvatars from "../../components/Characters/CharactersAvatars";
+import PlanetsAvatars from "../../components/Planets/PlanetsAvatars";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -56,18 +57,14 @@ const MovieDetails = () => {
             <MovieDetail movie={movie} loading={loading} movieId={id} />
             <CharactersAvatars
               characters={movie.characters}
-              loading={loading}
+              title="Personagens que apareceram"
+            />
+            <PlanetsAvatars
+              planets={movie.planets}
+              title="Planetas que apareceram"
             />
           </>
         )}
-        {/* {movie && id && (
-          // <>
-          //   <MovieCarousel movie={movie} />
-          //   <StarshipsCarousel movie={movie} />
-          //   <VehiclesCarousel movie={movie} />
-          // </>
-          <p>{movie}</p>
-        )} */}
       </MovieDetailContainer>
     </Layout>
   );
