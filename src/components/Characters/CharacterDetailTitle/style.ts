@@ -24,4 +24,9 @@ export const ContainerTitle = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 `;
