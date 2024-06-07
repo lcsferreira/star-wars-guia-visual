@@ -4,7 +4,7 @@ import { Character } from "../../../api/models/Character";
 import { Link } from "react-router-dom";
 import { SkeletonImage, CharacterContainer, Description } from "./style";
 
-interface CharacterCardProps {
+export interface CharacterCardProps {
   character: Character;
   loading: boolean;
 }
