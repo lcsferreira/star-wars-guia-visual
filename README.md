@@ -1,7 +1,5 @@
 # Guia visual de Star Wars
 
-![App Screenshot](https://drive.google.com/file/d/1kHDnM3wFK8sSzTgsIZULlVNx6x0EKhvX/preview)
-
 Este é um web-app interativo onde você pode navegar pelos personagens, filmes, planetas e naves do universo de Star Wars. Voc~e pode acessá-lo em https://star-wars-guia-visual.vercel.app/
 
 ## API
