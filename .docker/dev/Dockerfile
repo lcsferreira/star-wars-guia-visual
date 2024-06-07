@@ -17,6 +17,9 @@ RUN npm install
 # Copie todo o código fonte para o diretório de trabalho
 COPY . .
 
+# Copy the Docker-specific environment file
+COPY .env.prod .env
+
 # Compile o projeto
 RUN npm run build
 
