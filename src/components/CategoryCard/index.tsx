@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CategoryContainer, CategoryImage } from "./style";
+import { imgApiUrl } from "../../api/utils";
 
 export interface CategoryCardProps {
   title: string;
@@ -18,6 +19,9 @@ const CategoryCard = (category: CategoryCardProps) => {
             alt={category.title}
             src={category.cover_img}
             preview={false}
+            onError={(e) => {
+              e.currentTarget.src = `${imgApiUrl}placeholder.jpg`;
+            }}
           />
         }
       >

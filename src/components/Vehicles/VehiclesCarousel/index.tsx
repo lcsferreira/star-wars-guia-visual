@@ -1,5 +1,9 @@
 import { Card, Image } from "antd";
-import { CarouselContainer, CharacterVehiclesContainer } from "./style";
+import {
+  CarouselContainer,
+  CarouselImage,
+  CharacterVehiclesContainer,
+} from "./style";
 import { imgApiUrl } from "../../../api/utils";
 import useFetchVehicles from "../../../hooks/useFetchVehicles";
 
@@ -20,10 +24,13 @@ const VehiclesCarousel = ({ loading, vehiclesUrls }: VehiclesCarouselProps) => {
             title={vehicle.name}
             loading={loadingVehicles}
             cover={
-              <Image
+              <CarouselImage
                 src={`${imgApiUrl}vehicles/${
                   vehicle.url.match(/\d+/)?.[0]
                 }.jpg`}
+                onError={(e) => {
+                  e.currentTarget.src = `${imgApiUrl}placeholder.jpg`;
+                }}
                 alt={vehicle.name}
                 preview={false}
               />

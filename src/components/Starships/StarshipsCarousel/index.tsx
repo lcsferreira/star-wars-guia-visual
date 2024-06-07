@@ -1,5 +1,9 @@
-import { CarouselContainer, CharacterStarshipsContainer } from "./style";
-import { Card, Image } from "antd";
+import {
+  CarouselContainer,
+  CarouselImage,
+  CharacterStarshipsContainer,
+} from "./style";
+import { Card } from "antd";
 import { imgApiUrl } from "../../../api/utils";
 import useFetchStarships from "../../../hooks/useFetchStarships";
 
@@ -23,12 +27,15 @@ const StarshipsCarousel = ({
             title={starship.name}
             loading={loadingStarships}
             cover={
-              <Image
+              <CarouselImage
                 src={`${imgApiUrl}starships/${
                   starship.url.match(/\d+/)?.[0]
                 }.jpg`}
                 alt={starship.name}
                 preview={false}
+                onError={(e) => {
+                  e.currentTarget.src = `${imgApiUrl}placeholder.jpg`;
+                }}
               />
             }
           ></Card>

@@ -1,5 +1,9 @@
-import { Card, Image } from "antd"; // Import the Image component from antd
-import { CarouselContainer, CharacterMoviesContainer } from "./style";
+import { Card } from "antd"; // Import the Image component from antd
+import {
+  CarouselContainer,
+  CarouselImage,
+  CharacterMoviesContainer,
+} from "./style";
 import { imgApiUrl } from "../../../api/utils";
 import useFetchMovies from "../../../hooks/useFetchMovies";
 
@@ -20,10 +24,13 @@ const MovieCarousel = ({ loading, filmsUrls }: MovieCarouselProps) => {
             title={movie.title}
             loading={loadingMovies}
             cover={
-              <Image
+              <CarouselImage
                 src={`${imgApiUrl}films/${movie.url.match(/\d+/)?.[0]}.jpg`}
                 alt={movie.title}
                 preview={false}
+                onError={(e) => {
+                  e.currentTarget.src = `${imgApiUrl}placeholder.jpg`;
+                }}
               />
             }
           ></Card>
