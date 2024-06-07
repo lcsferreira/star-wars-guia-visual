@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Character } from "../api/models/Character";
 import { getCharacter } from "../api/services/characters";
 
-const useCharacters = (characters: string[]) => {
+const useFetchCharacters = (characters: string[]) => {
   const [charactersData, setCharacters] = useState<Character[]>([]);
   const [loadingCharacters, setLoadingCharacters] = useState<boolean>(false);
 
@@ -39,4 +39,4 @@ const useCharacters = (characters: string[]) => {
   return { charactersData, loadingCharacters };
 };
 
-export default useCharacters;
+export default useFetchCharacters;

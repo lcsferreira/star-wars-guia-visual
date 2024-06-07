@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import { Avatar, Col, Row, Skeleton, Tooltip } from "antd";
-import { Planet } from "../../../api/models/Planet";
-import { getPlanet } from "../../../api/services/planets";
 import { PlanetsAvatarsContainer } from "./style";
 import { imgApiUrl } from "../../../api/utils";
+import useFetchPlanets from "../../../hooks/useFetchPlanets";
 
 interface PlanetsAvatarsProps {
   planets: string[];
@@ -11,38 +9,7 @@ interface PlanetsAvatarsProps {
 }
 
 const PlanetsAvatars = ({ planets, title }: PlanetsAvatarsProps) => {
-  const [planetsData, setPlanets] = useState<Planet[]>([]);
-  const [loadingPlanets, setLoadingPlanets] = useState<boolean>(false);
-
-  const getAllPlanets = async (): Promise<Planet[]> => {
-    const planetsData = await Promise.all(
-      planets.map(async (url: string): Promise<Planet> => {
-        const planetId = url.match(/\d+/)?.[0];
-        if (planetId) {
-          return await getPlanet(planetId);
-        }
-        throw new Error("Invalid planetId");
-      })
-    );
-
-    return planetsData;
-  };
-
-  const fetchPlanets = async (): Promise<void> => {
-    setLoadingPlanets(true);
-    try {
-      const planetsData = await getAllPlanets();
-      setPlanets(planetsData);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoadingPlanets(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPlanets();
-  }, [planets]);
+  const { planetsData, loadingPlanets } = useFetchPlanets(planets);
 
   return (
     <PlanetsAvatarsContainer title={title} loading={loadingPlanets}>

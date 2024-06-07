@@ -1,6 +1,6 @@
 import { Avatar, Col, Row, Skeleton, Tooltip } from "antd";
 import { CharacterAvatarsContainer } from "./style";
-import useCharacters from "../../../hooks/useCharactersAvatars";
+import useFetchCharacters from "../../../hooks/useFetchCharacters";
 import { imgApiUrl } from "../../../api/utils";
 
 interface CharactersAvatarsProps {
@@ -9,7 +9,7 @@ interface CharactersAvatarsProps {
 }
 
 const CharactersAvatars = ({ characters, title }: CharactersAvatarsProps) => {
-  const { charactersData, loadingCharacters } = useCharacters(characters);
+  const { charactersData, loadingCharacters } = useFetchCharacters(characters);
 
   return (
     <CharacterAvatarsContainer title={title} loading={loadingCharacters}>

@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { getVehicle } from "../../../api/services/vehicles";
 import { Card, Image } from "antd";
 import { CarouselContainer, CharacterVehiclesContainer } from "./style";
-import { Vehicle } from "../../../api/models/Vehicle";
 import { imgApiUrl } from "../../../api/utils";
+import useFetchVehicles from "../../../hooks/useFetchVehicles";
 
 interface VehiclesCarouselProps {
   loading: boolean;
@@ -11,38 +9,7 @@ interface VehiclesCarouselProps {
 }
 
 const VehiclesCarousel = ({ loading, vehiclesUrls }: VehiclesCarouselProps) => {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const [loadingVehicles, setLoadingVehicles] = useState<boolean>(false);
-
-  const getAllVehicles = async (): Promise<Vehicle[]> => {
-    const vehiclesData = await Promise.all(
-      vehiclesUrls.map(async (url: string): Promise<Vehicle> => {
-        const vehicleId = url.match(/\d+/)?.[0]; // Add a null check before accessing the first element
-        if (vehicleId) {
-          return await getVehicle(vehicleId);
-        }
-        throw new Error("Invalid vehicleId");
-      })
-    );
-
-    return vehiclesData;
-  };
-
-  const fetchVehicles = async (): Promise<void> => {
-    setLoadingVehicles(true);
-    try {
-      const vehiclesData = await getAllVehicles();
-      setVehicles(vehiclesData);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoadingVehicles(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchVehicles();
-  }, [vehiclesUrls]);
+  const { vehicles, loadingVehicles } = useFetchVehicles(vehiclesUrls);
 
   return (
     <CharacterVehiclesContainer title="Veículos que pilotou" loading={loading}>
