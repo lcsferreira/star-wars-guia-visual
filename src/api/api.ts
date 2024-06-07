@@ -1,7 +1,8 @@
 import axios from "axios";
+import { swapiUrl } from "../api/utils";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: swapiUrl,
 });
 
 export default api;

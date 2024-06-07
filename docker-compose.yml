@@ -4,12 +4,11 @@ services:
     build:
       context: .
       dockerfile: ./.docker/dev/Dockerfile
-    restart: unless-stopped
     volumes:
       - ".:/app"
       - "/app/node_modules"
     ports:
-      - 3000:3000
+      - 4000:3000
     environment:
-      - NODE_ENV=development
-    command: ["npm", "start"]
+      - ENV=development
+    command: "npm run start"

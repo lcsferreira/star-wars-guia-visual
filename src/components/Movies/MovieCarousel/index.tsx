@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Movie } from "../../../api/models/Movie";
 import { getMovie } from "../../../api/services/movies";
 import { CarouselContainer, CharacterMoviesContainer } from "./style";
+import { imgApiUrl } from "../../../api/utils";
 
 interface MovieCarouselProps {
   loading: boolean;
@@ -53,9 +54,7 @@ const MovieCarousel = ({ loading, filmsUrls }: MovieCarouselProps) => {
             loading={loadingMovies}
             cover={
               <Image
-                src={`https://starwars-visualguide.com/assets/img/films/${
-                  movie.url.match(/\d+/)?.[0]
-                }.jpg`}
+                src={`${imgApiUrl}films/${movie.url.match(/\d+/)?.[0]}.jpg`}
                 alt={movie.title}
                 preview={false}
               />

@@ -1,4 +1,3 @@
-import { Space } from "antd/lib";
 import Tooltip from "antd/es/tooltip";
 import { ContainerTitle, NameTitle, TooltipTitleName } from "./style";
 

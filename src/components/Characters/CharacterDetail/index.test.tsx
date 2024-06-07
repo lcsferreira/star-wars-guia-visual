@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import CharacterDetail from "./index";
+import { imgApiUrl } from "../../../api/utils";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
@@ -69,7 +70,7 @@ describe("CharacterDetail", () => {
     expect(characterImage).toBeInTheDocument();
     expect(characterImage).toHaveAttribute(
       "src",
-      "https://starwars-visualguide.com/assets/img/characters/1.jpg"
+      `${imgApiUrl}characters/1.jpg`
     );
   });
 

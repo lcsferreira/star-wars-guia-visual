@@ -1,6 +1,4 @@
 import { Movie } from "../api/models/Movie";
-import { getCharacter } from "../api/services/characters";
-import { getPlanet } from "../api/services/planets";
 
 const translateTitle = (title: string): string => {
   if (title === "A New Hope") {

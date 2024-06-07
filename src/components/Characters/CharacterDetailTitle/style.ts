@@ -1,4 +1,3 @@
-import Tooltip from "antd/es/tooltip";
 import styled from "styled-components";
 import Typography from "antd/es/typography";
 

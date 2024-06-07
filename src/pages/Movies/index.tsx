@@ -12,7 +12,6 @@ const Movies = () => {
     loading,
     page,
     total,
-    search,
     handleSearch,
     handleSearchChange,
     setPage,

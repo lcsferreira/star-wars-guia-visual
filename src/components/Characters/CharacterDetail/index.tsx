@@ -3,6 +3,7 @@ import { Col, Descriptions, Image, Row } from "antd";
 import { BackButton, CharacterDetailCard } from "./style";
 import CharacterDetailTitle from "../CharacterDetailTitle";
 import useWindowDimensions from "../../../hooks/useWindowDimensios";
+import { imgApiUrl } from "../../../api/utils";
 
 interface CharacterDetailProps {
   character: Character;
@@ -15,7 +16,7 @@ const CharacterDetail = ({
   loading,
   characterId,
 }: CharacterDetailProps) => {
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <CharacterDetailCard
@@ -26,7 +27,7 @@ const CharacterDetail = ({
       <Row gutter={[16, 16]}>
         <Col span={6} xs={24} sm={24} md={6} lg={6} xl={6}>
           <Image
-            src={`https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`}
+            src={`${imgApiUrl}characters/${characterId}.jpg`}
             alt={character?.name}
             style={{ width: "100%" }}
           />

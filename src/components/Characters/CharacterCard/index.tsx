@@ -1,8 +1,9 @@
-import { Image, Skeleton } from "antd";
+import { Image } from "antd";
 import Meta from "antd/es/card/Meta";
 import { Character } from "../../../api/models/Character";
 import { Link } from "react-router-dom";
 import { SkeletonImage, CharacterContainer, Description } from "./style";
+import { imgApiUrl } from "../../../api/utils";
 
 export interface CharacterCardProps {
   character: Character;
@@ -17,17 +18,16 @@ const CharacterCard = ({ character, loading }: CharacterCardProps) => {
         loading={loading}
         hoverable
         cover={
-          true ? (
+          loading ? (
             <SkeletonImage active />
           ) : (
             <Image
               alt={character.name}
-              src={`https://starwars-visualguide.com/assets/img/characters/${
+              src={`${imgApiUrl}characters/${
                 character?.url?.match(/\d+/)?.[0]
               }.jpg`}
               onError={(e) => {
-                e.currentTarget.src =
-                  "https://starwars-visualguide.com/assets/img/placeholder.jpg";
+                e.currentTarget.src = `${imgApiUrl}placeholder.jpg`;
               }}
               preview={false}
               height={300}

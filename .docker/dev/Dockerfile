@@ -8,11 +8,11 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Copie o package.json e package-lock.json
-COPY package.json .
+COPY package*.json ./
 COPY package-lock.json .
 
 # Instale as dependências do projeto
-RUN npm install --silent
+RUN npm install
 
 # Copie todo o código fonte para o diretório de trabalho
 COPY . .
@@ -21,7 +21,7 @@ COPY . .
 RUN npm run build
 
 # Exponha a porta que a aplicação irá rodar
-EXPOSE 3000
+EXPOSE 4000
 
 # Defina o comando para iniciar a aplicação
 CMD ["npm", "run", "start"]

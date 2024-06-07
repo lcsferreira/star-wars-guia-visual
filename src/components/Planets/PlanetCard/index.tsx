@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { Planet } from "../../../api/models/Planet";
 import { Description, PlanetContainer, SkeletonImage } from "./style";
 import { Image } from "antd";
 import Meta from "antd/es/card/Meta";
+import { imgApiUrl } from "../../../api/utils";
 
 interface PlanetCardProps {
   planet: Planet;
@@ -11,7 +11,6 @@ interface PlanetCardProps {
 
 const PlanetCard = ({ planet, loading }: PlanetCardProps) => {
   return (
-    // <Link to={`/planets/${planet.url.match(/\d+/)?.[0]}`}>
     <PlanetContainer
       key={planet.url}
       loading={loading}
@@ -22,12 +21,9 @@ const PlanetCard = ({ planet, loading }: PlanetCardProps) => {
         ) : (
           <Image
             alt={planet.name}
-            src={`https://starwars-visualguide.com/assets/img/planets/${
-              planet?.url?.match(/\d+/)?.[0]
-            }.jpg`}
+            src={`${imgApiUrl}planets/${planet?.url?.match(/\d+/)?.[0]}.jpg`}
             onError={(e) => {
-              e.currentTarget.src =
-                "https://starwars-visualguide.com/assets/img/placeholder.jpg";
+              e.currentTarget.src = `${imgApiUrl}placeholder.jpg`;
             }}
             preview={false}
             height={300}
@@ -40,7 +36,6 @@ const PlanetCard = ({ planet, loading }: PlanetCardProps) => {
         description={<Description type="secondary">{planet.name}</Description>}
       />
     </PlanetContainer>
-    // </Link>
   );
 };
 

@@ -3,6 +3,7 @@ import { Starship } from "../../../api/models/Starship";
 import { getStarship } from "../../../api/services/starships";
 import { CarouselContainer, CharacterStarshipsContainer } from "./style";
 import { Card, Image } from "antd";
+import { imgApiUrl } from "../../../api/utils";
 
 interface StarshipsCarouselProps {
   loading: boolean;
@@ -56,7 +57,7 @@ const StarshipsCarousel = ({
             loading={loadingStarships}
             cover={
               <Image
-                src={`https://starwars-visualguide.com/assets/img/starships/${
+                src={`${imgApiUrl}starships/${
                   starship.url.match(/\d+/)?.[0]
                 }.jpg`}
                 alt={starship.name}

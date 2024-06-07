@@ -7,7 +7,7 @@ import {
   OpeningCrawl,
   TextContainer,
 } from "./style";
-import { Modal, Typography } from "antd";
+import { Modal } from "antd";
 
 interface StarWarsCrawlProps {
   animate: boolean;

@@ -18,7 +18,6 @@ const Planets = () => {
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
-  const [error, setError] = useState<string>("");
   const debouncedSearch = useDebounce(search, 500);
 
   const loadPlanets = async (
@@ -31,7 +30,7 @@ const Planets = () => {
       setPlanets(response.results);
       setTotal(response.count);
     } catch (error) {
-      setError("Erro ao carregar planetas");
+      console.log(error);
     } finally {
       setLoading(false);
     }

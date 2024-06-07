@@ -1,4 +1,4 @@
-import { Modal, Typography } from "antd";
+import { Typography } from "antd";
 import styled, { css, keyframes } from "styled-components";
 
 const crawlAnimation = keyframes`

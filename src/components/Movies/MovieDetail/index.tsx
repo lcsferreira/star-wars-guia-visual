@@ -6,6 +6,7 @@ import { useState } from "react";
 import PlayCircleFilled from "@ant-design/icons/lib/icons/PlayCircleFilled";
 import StopFilled from "@ant-design/icons/lib/icons/StopFilled";
 import useWindowDimensions from "../../../hooks/useWindowDimensios";
+import { imgApiUrl } from "../../../api/utils";
 
 interface MovieDetailProps {
   movie: Movie;
@@ -15,7 +16,7 @@ interface MovieDetailProps {
 
 const MovieDetail = ({ movie, loading, movieId }: MovieDetailProps) => {
   const [playOpeningCrawl, setPlayOpeningCrawl] = useState<boolean>(false);
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   return (
     <>
       <MovieDetailCard
@@ -30,7 +31,7 @@ const MovieDetail = ({ movie, loading, movieId }: MovieDetailProps) => {
         <Row gutter={[16, 16]}>
           <Col span={6} xs={24} sm={24} md={6} lg={6} xl={6}>
             <Image
-              src={`https://starwars-visualguide.com/assets/img/films/${movieId}.jpg`}
+              src={`${imgApiUrl}films/${movieId}.jpg`}
               alt={movie?.title}
               style={{ width: "100%" }}
             />

@@ -3,6 +3,7 @@ import { getVehicle } from "../../../api/services/vehicles";
 import { Card, Image } from "antd";
 import { CarouselContainer, CharacterVehiclesContainer } from "./style";
 import { Vehicle } from "../../../api/models/Vehicle";
+import { imgApiUrl } from "../../../api/utils";
 
 interface VehiclesCarouselProps {
   loading: boolean;
@@ -53,7 +54,7 @@ const VehiclesCarousel = ({ loading, vehiclesUrls }: VehiclesCarouselProps) => {
             loading={loadingVehicles}
             cover={
               <Image
-                src={`https://starwars-visualguide.com/assets/img/vehicles/${
+                src={`${imgApiUrl}vehicles/${
                   vehicle.url.match(/\d+/)?.[0]
                 }.jpg`}
                 alt={vehicle.name}

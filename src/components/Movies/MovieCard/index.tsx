@@ -3,6 +3,7 @@ import { Image } from "antd/lib";
 import { Link } from "react-router-dom";
 import Meta from "antd/es/card/Meta";
 import { MovieContainer } from "./style";
+import { imgApiUrl } from "../../../api/utils";
 
 interface MovieCardProps {
   movie: Movie;
@@ -21,18 +22,15 @@ const MovieCard = ({ movie, loading }: MovieCardProps) => {
           loading ? (
             <Image
               alt={movie.title}
-              src={`https://starwars-visualguide.com/assets/img/placeholder.jpg`}
+              src={`${imgApiUrl}placeholder.jpg`}
               preview={false}
             />
           ) : (
             <Image
               alt={movie.title}
-              src={`https://starwars-visualguide.com/assets/img/films/${
-                movie?.url?.match(/\d+/)?.[0]
-              }.jpg`}
+              src={`${imgApiUrl}films/${movie?.url?.match(/\d+/)?.[0]}.jpg`}
               onError={(e) => {
-                e.currentTarget.src =
-                  "https://starwars-visualguide.com/assets/img/placeholder.jpg";
+                e.currentTarget.src = `${imgApiUrl}placeholder.jpg`;
               }}
               preview={false}
             />

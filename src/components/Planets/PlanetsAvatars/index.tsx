@@ -3,6 +3,7 @@ import { Avatar, Col, Row, Skeleton, Tooltip } from "antd";
 import { Planet } from "../../../api/models/Planet";
 import { getPlanet } from "../../../api/services/planets";
 import { PlanetsAvatarsContainer } from "./style";
+import { imgApiUrl } from "../../../api/utils";
 
 interface PlanetsAvatarsProps {
   planets: string[];
@@ -53,7 +54,7 @@ const PlanetsAvatars = ({ planets, title }: PlanetsAvatarsProps) => {
               <Tooltip title={planet.name} placement="top">
                 <Avatar
                   size={{ xs: 48, sm: 64, md: 80, lg: 96, xl: 120, xxl: 120 }}
-                  src={`https://starwars-visualguide.com/assets/img/planets/${
+                  src={`${imgApiUrl}planets/${
                     planet.url.match(/\d+/)?.[0]
                   }.jpg`}
                   alt={planet.name}
