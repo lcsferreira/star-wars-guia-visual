@@ -3,7 +3,7 @@ import Card from "antd/es/card/Card";
 import Skeleton from "antd/es/skeleton";
 import { Typography } from "antd";
 
-export const CharacterContainer = styled(Card)`
+export const StarshipContainer = styled(Card)`
   width: 240px;
   margin: 10px;
   height: 400px;

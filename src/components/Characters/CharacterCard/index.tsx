@@ -17,7 +17,7 @@ const CharacterCard = ({ character, loading }: CharacterCardProps) => {
         loading={loading}
         hoverable
         cover={
-          loading ? (
+          true ? (
             <SkeletonImage active />
           ) : (
             <Image
@@ -25,6 +25,10 @@ const CharacterCard = ({ character, loading }: CharacterCardProps) => {
               src={`https://starwars-visualguide.com/assets/img/characters/${
                 character?.url?.match(/\d+/)?.[0]
               }.jpg`}
+              onError={(e) => {
+                e.currentTarget.src =
+                  "https://starwars-visualguide.com/assets/img/placeholder.jpg";
+              }}
               preview={false}
               height={300}
             />

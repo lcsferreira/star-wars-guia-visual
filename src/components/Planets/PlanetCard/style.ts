@@ -10,8 +10,10 @@ export const PlanetContainer = styled(Card)`
 `;
 
 export const SkeletonImage = styled(Skeleton.Image)`
-  height: 300px;
-  width: 240px;
+  .ant-skeleton-image {
+    height: 300px !important;
+    width: 240px !important;
+  }
 `;
 
 export const Description = styled(Typography.Paragraph)`

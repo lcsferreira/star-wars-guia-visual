@@ -18,13 +18,25 @@ const MovieCard = ({ movie, loading }: MovieCardProps) => {
         hoverable
         loading={loading}
         cover={
-          <Image
-            alt={movie.title}
-            src={`https://starwars-visualguide.com/assets/img/films/${
-              movie?.url?.match(/\d+/)?.[0]
-            }.jpg`}
-            preview={false}
-          />
+          loading ? (
+            <Image
+              alt={movie.title}
+              src={`https://starwars-visualguide.com/assets/img/placeholder.jpg`}
+              preview={false}
+            />
+          ) : (
+            <Image
+              alt={movie.title}
+              src={`https://starwars-visualguide.com/assets/img/films/${
+                movie?.url?.match(/\d+/)?.[0]
+              }.jpg`}
+              onError={(e) => {
+                e.currentTarget.src =
+                  "https://starwars-visualguide.com/assets/img/placeholder.jpg";
+              }}
+              preview={false}
+            />
+          )
         }
       >
         <Meta title={movie.title} description={movie.release_date} />

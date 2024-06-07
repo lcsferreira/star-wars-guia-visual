@@ -7,6 +7,7 @@ import Character from "../pages/Character";
 import { RouteLayout } from "./style";
 import Movie from "../pages/Movie";
 import Planets from "../pages/Planets";
+import Startships from "../pages/Starships";
 
 const AppLayout = () => {
   return (
@@ -31,16 +32,8 @@ const router = createBrowserRouter([
         element: <Planets />,
       },
       {
-        path: "/species",
-        element: <div>Species</div>,
-      },
-      {
         path: "/starships",
-        element: <div>Starships</div>,
-      },
-      {
-        path: "/vehicles",
-        element: <div>Vehicles</div>,
+        element: <Startships />,
       },
     ],
   },
